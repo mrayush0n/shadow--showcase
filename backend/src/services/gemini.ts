@@ -1,7 +1,7 @@
 import { GoogleGenAI, Modality } from '@google/genai';
 
 // Configuration
-// User requested Gemini 3 Pro Preview models.
+// Primary reasoning model for deep multimodal analysis.
 const GEMINI_MODEL = 'gemini-3-pro-preview';
 
 // Initialize Gemini AI client
@@ -43,7 +43,7 @@ export const generateImage = async (
 ): Promise<{ imageData: string; mimeType: string } | null> => {
     const ai = getGeminiClient();
 
-    // User specified "gemini-3-pro-image-preview" for image tasks.
+    // User specified "gemini-3-pro-image-preview" (Nano Banana Pro) for high-fidelity image gen.
     const response = await ai.models.generateContent({
         model: 'gemini-3-pro-image-preview',
         contents: prompt,
@@ -100,7 +100,7 @@ export const editImage = async (
     const ai = getGeminiClient();
 
     const response = await ai.models.generateContent({
-        model: 'gemini-3-pro-image-preview',
+        model: 'gemini-3-pro-image-preview', // Specialized image editing
         contents: {
             parts: [
                 { inlineData: { mimeType, data: imageData } },
@@ -143,7 +143,7 @@ export const processCode = async (
     };
 
     const response = await ai.models.generateContent({
-        model: GEMINI_MODEL,
+        model: GEMINI_MODEL, // 3 Pro Preview for coding
         contents: prompts[mode],
         config: {
             systemInstruction: 'You are an expert software engineer and coding assistant. Provide clear, well-documented code and explanations.',
@@ -242,7 +242,9 @@ export const chat = async (
     enableSearch: boolean
 ): Promise<{ text: string; groundingLinks?: any[] }> => {
     const ai = getGeminiClient();
-    const modelName = isReasoningMode ? GEMINI_MODEL : GEMINI_MODEL; // Both use Pro Preview for max capabilities
+    const modelName = isReasoningMode ? GEMINI_MODEL : GEMINI_MODEL;
+
+    // Both modes use 3 Pro Preview as requested for max capabilities reasoning
 
     const tools = enableSearch ? [{ googleSearch: {} }] : [];
 
@@ -276,7 +278,7 @@ export const generateVideo = async (
     const imagePayload = image && mimeType ? { image: { imageBytes: image, mimeType: mimeType } } : {};
 
     let operation = await ai.models.generateVideos({
-        model: 'veo-2.0-generate-preview',
+        model: 'veo-3.1', // User explicitly requested Veo 3.1
         prompt: prompt,
         ...imagePayload,
         config: { numberOfVideos: 1, resolution: '720p', aspectRatio: aspectRatio }
@@ -309,7 +311,7 @@ export const generateSpeech = async (
     const ai = getGeminiClient();
 
     const response = await ai.models.generateContent({
-        model: "gemini-2.0-flash-exp",
+        model: "gemini-2.5-flash", // User requested gemini-2.5-flash for audio
         contents: { parts: [{ text: text }] },
         config: {
             responseModalities: [Modality.AUDIO],
@@ -333,7 +335,7 @@ export const transcribeAudio = async (
     const ai = getGeminiClient();
 
     const response = await ai.models.generateContent({
-        model: GEMINI_MODEL,
+        model: "gemini-2.5-flash", // User requested gemini-2.5-flash for audio
         contents: {
             parts: [
                 { inlineData: { mimeType, data: audioData } },
@@ -360,7 +362,7 @@ export const processMultimodal = async (
     ];
 
     const response = await ai.models.generateContent({
-        model: GEMINI_MODEL,
+        model: GEMINI_MODEL, // Using 3 Pro Preview as instructed for "deep multimodal analysis"
         contents: { parts: contentParts },
     });
 
