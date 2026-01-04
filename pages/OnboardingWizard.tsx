@@ -319,11 +319,17 @@ const Step5Interests: React.FC<StepProps> = ({ data, updateData }) => (
 import { useAuth } from '../context/AuthContext';
 
 export const OnboardingWizard: React.FC<{ onComplete?: () => void; onBack?: () => void }> = ({ onComplete, onBack }) => {
-    const { user } = useAuth();
+    const { user, loading } = useAuth(); // Get loading state
+    const [currentStep, setCurrentStep] = useState(1);
+    const [formData, setFormData] = useState<FormData>(initialFormData);
+    const [errors, setErrors] = useState<Record<string, string>>({});
+    const [isLoading, setIsLoading] = useState(false);
+    const [globalError, setGlobalError] = useState('');
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     // Initialize with existing user data if available
     useEffect(() => {
-        if (user) {
+        if (!loading && user) {
             setFormData(prev => ({
                 ...prev,
                 firstName: prev.firstName || user.displayName?.split(' ')[0] || '',
@@ -331,12 +337,11 @@ export const OnboardingWizard: React.FC<{ onComplete?: () => void; onBack?: () =
                 email: user.email || '',
                 photoURL: user.photoURL || null
             }));
-            // Skip account step if user exists
-            if (currentStep === 1) {
-                // We keep them on step 1 to confirm details, but logic will skip step 2
-            }
+
+            // If user exists, we are in "Completion Mode"
+            // We can intelligently decide where to start or just let them review Step 1
         }
-    }, [user]);
+    }, [user, loading]);
 
     const updateData = (field: string, value: any) => {
         setFormData(prev => ({ ...prev, [field]: value }));
@@ -366,7 +371,7 @@ export const OnboardingWizard: React.FC<{ onComplete?: () => void; onBack?: () =
                 if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
                 break;
             case 2:
-                // Skip validation for existing users
+                // Only validate account fields if this is a NEW user (no auth user present)
                 if (!user) {
                     if (!formData.email.trim()) newErrors.email = 'Email is required';
                     else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Invalid email address';
@@ -385,11 +390,13 @@ export const OnboardingWizard: React.FC<{ onComplete?: () => void; onBack?: () =
     const handleNext = () => {
         if (validateStep(currentStep)) {
             if (currentStep < 5) {
-                // Skip Step 2 (Account) if user is already logged in
                 let nextStep = currentStep + 1;
+
+                // Skip Step 2 (Account) if user is already logged in
                 if (user && nextStep === 2) {
                     nextStep = 3;
                 }
+
                 setCurrentStep(nextStep);
             } else {
                 handleSubmit();
@@ -399,11 +406,13 @@ export const OnboardingWizard: React.FC<{ onComplete?: () => void; onBack?: () =
 
     const handleBack = () => {
         if (currentStep > 1) {
-            // Skip Step 2 (Account) if user is already logged in going back
             let prevStep = currentStep - 1;
+
+            // Skip Step 2 (Account) if user is already logged in going back
             if (user && prevStep === 2) {
                 prevStep = 1;
             }
+
             setCurrentStep(prevStep);
         } else if (onBack) {
             onBack();
@@ -417,17 +426,13 @@ export const OnboardingWizard: React.FC<{ onComplete?: () => void; onBack?: () =
         try {
             let currentUser = user;
 
-            // IF NO USER: Create new account (Email flow)
-            // Note: If we are already logged in (user exists), we skip creation.
+            // Scenario 1: New User (Email/Pass flow) - Create Auth User first
             if (!currentUser) {
                 const userCredential = await auth.createUserWithEmailAndPassword(formData.email, formData.password);
                 currentUser = userCredential.user;
             }
 
             if (!currentUser) throw new Error('Could not create or find user.');
-
-            // FIX: Ensure we have the latest user object for updates
-            // In email flow, currentUser is the object. In Google flow, 'user' from context is it.
 
             let photoURL = formData.photoURL || currentUser.photoURL;
 
@@ -455,7 +460,7 @@ export const OnboardingWizard: React.FC<{ onComplete?: () => void; onBack?: () =
                 bio: formData.bio.trim(),
                 interests: formData.interests.trim(),
                 receiveEmails: formData.receiveEmails,
-                profileComplete: true,
+                profileComplete: true, // FLAG: Profile is now complete
                 updatedAt: new Date().toISOString()
             }, { merge: true }); // Merge to preserve existing Google data
 
@@ -471,12 +476,24 @@ export const OnboardingWizard: React.FC<{ onComplete?: () => void; onBack?: () =
                 }
             }
             setGlobalError(errorMessage);
-            // Go back to account step ONLY if it's an auth creation error
-            if (err.code?.startsWith('auth/') && !user) setCurrentStep(2);
+            // Go back to account step ONLY if it's an auth creation error (and implies we were trying to create a user)
+            if (err.code?.startsWith('auth/') && !user) {
+                setCurrentStep(2);
+            }
         } finally {
             setIsLoading(false);
         }
     };
+
+    // Show loading spinner while Auth context is initializing
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <AnimatedBackground variant="subtle" />
+                <Spinner size="lg" />
+            </div>
+        );
+    }
 
     const currentStepData = STEPS.find(s => s.id === currentStep)!;
     const progress = (currentStep / STEPS.length) * 100;
