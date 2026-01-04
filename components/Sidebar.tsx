@@ -60,7 +60,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ pages, activePageId, setActive
           <div className="flex items-center gap-3">
             {/* Logo */}
             <div className="relative">
-              <img src="/logo.png" alt="Shadow Showcase" className="w-11 h-11 rounded-xl shadow-lg shadow-aurora-500/30 object-cover" />
+              <img src="/app-logo.png" alt="Shadow Showcase" className="w-11 h-11 rounded-xl shadow-lg shadow-aurora-500/30 object-cover" />
               {/* Glow effect */}
               <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-aurora-500 to-rose-500 blur-lg opacity-40 -z-10" />
             </div>

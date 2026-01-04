@@ -95,7 +95,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ onShowSignup, onShowForgotPa
           <div className="text-center space-y-4">
             {/* Logo */}
             <div className="relative inline-flex">
-              <img src="/logo.png" alt="Shadow Showcase" className="w-16 h-16 rounded-2xl shadow-xl object-cover" />
+              <img src="/app-logo.png" alt="Shadow Showcase" className="w-16 h-16 rounded-2xl shadow-xl object-cover" />
               {/* Glow */}
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-aurora-500 to-rose-500 blur-xl opacity-40 -z-10" />
             </div>
