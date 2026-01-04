@@ -489,7 +489,7 @@ export const OnboardingWizard: React.FC<{ onComplete?: () => void; onBack?: () =
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center">
-                <AnimatedBackground variant="subtle" />
+                <AnimatedBackground variant="minimal" />
                 <Spinner size="lg" />
             </div>
         );
