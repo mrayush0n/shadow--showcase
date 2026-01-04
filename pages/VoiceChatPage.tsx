@@ -29,21 +29,22 @@ export const VoiceChatPage: React.FC = () => {
 
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            const mediaRecorder = new MediaRecorder(stream);
+            const mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus') ? 'audio/webm;codecs=opus' : 'audio/mp4';
+            const mediaRecorder = new MediaRecorder(stream, { mimeType });
             const audioChunks: Blob[] = [];
 
             mediaRecorder.ondataavailable = (e) => audioChunks.push(e.data);
 
             mediaRecorder.onstop = async () => {
                 setAiState('thinking');
-                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                const audioBlob = new Blob(audioChunks, { type: mimeType });
                 const reader = new FileReader();
                 reader.readAsDataURL(audioBlob);
                 reader.onloadend = async () => {
                     const base64Audio = (reader.result as string).split(',')[1];
                     try {
                         // Call Backend Pipeline
-                        const response = await aiService.voiceChat(base64Audio, 'audio/wav', []); // History can be managed here if needed
+                        const response = await aiService.voiceChat(base64Audio, mimeType, []); // History can be managed here if needed
 
                         setLiveTranscript(response.textResponse);
                         setAiState('speaking');
@@ -74,12 +75,6 @@ export const VoiceChatPage: React.FC = () => {
                 };
             };
 
-            // Auto-stop after silence or manual stop? For this "Orb" interface, let's make it "Hold to Speak" or "Toggle".
-            // The UI suggests "Tap to start" (Toggle).
-            // So we just start recording here. 
-            // We need a ref to access mediaRecorder in 'stop' function.
-            // But wait, 'stop' function is defined separately.
-            // I need to update state/refs to hold mediaRecorder.
             (window as any).currentMediaRecorder = mediaRecorder;
 
             mediaRecorder.start();
