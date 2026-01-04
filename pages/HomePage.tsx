@@ -59,49 +59,49 @@ const featureConfig: { [key: string]: { description: string, gradient: string, i
     gradient: "from-pink-500 to-rose-600",
     icon: "music_note",
     span: "",
-    comingSoon: false
+    comingSoon: true
   },
   threeDStudio: {
     description: "Text-to-3D model creation.",
     gradient: "from-cyan-500 to-teal-600",
     icon: "view_in_ar",
     span: "",
-    comingSoon: false
+    comingSoon: true
   },
   documentChat: {
     description: "Chat with PDFs and documents (RAG).",
     gradient: "from-orange-500 to-amber-600",
     icon: "description",
     span: "",
-    comingSoon: false
+    comingSoon: true
   },
   agentBuilder: {
     description: "Build custom AI personas.",
     gradient: "from-indigo-500 to-purple-600",
     icon: "smart_toy",
     span: "",
-    comingSoon: false
+    comingSoon: true
   },
   gallery: {
     description: "Share and discover community creations.",
     gradient: "from-red-500 to-pink-600",
     icon: "collections",
     span: "",
-    comingSoon: false
+    comingSoon: true
   },
   promptMarket: {
     description: "Curated prompt library for all tools.",
     gradient: "from-teal-500 to-green-600",
     icon: "storefront",
     span: "",
-    comingSoon: false
+    comingSoon: true
   },
   canvas: {
     description: "Infinite whiteboard for creative ideas.",
     gradient: "from-lime-500 to-green-600",
     icon: "dashboard",
     span: "",
-    comingSoon: false
+    comingSoon: true
   },
   // Wave 2 Coming Soon
   podcastStudio: {
@@ -109,14 +109,14 @@ const featureConfig: { [key: string]: { description: string, gradient: string, i
     gradient: "from-purple-500 to-violet-600",
     icon: "podcasts",
     span: "",
-    comingSoon: false
+    comingSoon: true
   },
   dataInsights: {
     description: "Upload data, get AI-powered charts and analysis.",
     gradient: "from-blue-500 to-cyan-600",
     icon: "insights",
     span: "",
-    comingSoon: false
+    comingSoon: true
   },
   presentationBuilder: {
     description: "Generate slide decks from any topic.",
