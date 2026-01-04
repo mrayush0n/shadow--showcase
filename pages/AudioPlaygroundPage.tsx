@@ -120,7 +120,7 @@ export const AudioPlaygroundPage: React.FC = () => {
                 ) : (
                     <div className="flex-1 flex flex-col items-center justify-center relative z-10 gap-6">
                         {isTtsLoading ? (
-                            <div className="text-indigo-500 animate-bounce"><Icon name="graphic_eq" className="text-6xl" /></div>
+                            <div className="text-indigo-500"><Icon name="graphic_eq" className="text-6xl" /></div>
                         ) : audioUrl ? (
                             <div className="flex flex-col items-center gap-4 animate-in fade-in zoom-in">
                                 <div className="w-24 h-24 bg-indigo-500 rounded-full flex items-center justify-center shadow-lg shadow-indigo-500/30">

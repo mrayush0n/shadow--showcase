@@ -81,13 +81,7 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({ onBack }) => {
                 </button>
             </div>
 
-            <style>{`
-                @keyframes float {
-                    0%, 100% { transform: translate(-50%, -50%) rotate(10deg) translateY(0); }
-                    50% { transform: translate(-50%, -50%) rotate(10deg) translateY(-20px); }
-                }
-                .animate-float { animation: float 6s ease-in-out infinite; }
-            `}</style>
+
         </div>
     );
 };

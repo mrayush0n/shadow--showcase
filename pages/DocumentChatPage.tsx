@@ -188,9 +188,9 @@ export const DocumentChatPage: React.FC<DocumentChatPageProps> = ({ onNavigate }
                                         <div className="flex justify-start">
                                             <div className="bg-slate-100 dark:bg-slate-800 rounded-2xl px-4 py-3">
                                                 <div className="flex gap-1">
-                                                    <div className="w-2 h-2 bg-amber-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                                                    <div className="w-2 h-2 bg-amber-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                                                    <div className="w-2 h-2 bg-amber-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                                                    <div className="w-2 h-2 bg-amber-500 rounded-full" />
+                                                    <div className="w-2 h-2 bg-amber-500 rounded-full" />
+                                                    <div className="w-2 h-2 bg-amber-500 rounded-full" />
                                                 </div>
                                             </div>
                                         </div>
