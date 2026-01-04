@@ -93,7 +93,7 @@ export const MusicStudioPage: React.FC<MusicStudioPageProps> = ({ onNavigate }) 
                                 />
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Genre</label>
                                     <select className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white">
@@ -206,7 +206,7 @@ export const MusicStudioPage: React.FC<MusicStudioPageProps> = ({ onNavigate }) 
                             </button>
 
                             {stems && (
-                                <div className="mt-6 grid grid-cols-2 gap-4">
+                                <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div className="p-4 bg-pink-500/10 border border-pink-500/20 rounded-xl">
                                         <div className="flex items-center gap-2 mb-3">
                                             <Icon name="mic" className="text-pink-500" />

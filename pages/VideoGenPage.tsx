@@ -158,8 +158,8 @@ export const VideoGenPage: React.FC = () => {
                 />
             </div>
 
-            <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+                <div className="flex items-center gap-4 flex-wrap">
                     <span className="font-medium">Aspect Ratio:</span>
                     <button onClick={() => setAspectRatio('16:9')} className={`px-3 py-1 rounded ${aspectRatio === '16:9' ? 'bg-purple-600 text-white' : 'bg-gray-300 dark:bg-gray-700'}`}>16:9</button>
                     <button onClick={() => setAspectRatio('9:16')} className={`px-3 py-1 rounded ${aspectRatio === '9:16' ? 'bg-purple-600 text-white' : 'bg-gray-300 dark:bg-gray-700'}`}>9:16</button>
@@ -167,7 +167,7 @@ export const VideoGenPage: React.FC = () => {
                 <button
                     onClick={handleGenerate}
                     disabled={isLoading || !prompt.trim() || (mode === 'image-to-video' && !image)}
-                    className="bg-purple-600 hover:bg-purple-700 disabled:bg-gray-500 dark:disabled:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2 transition-colors duration-200"
+                    className="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 disabled:bg-gray-500 dark:disabled:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors duration-200"
                 >
                     {isLoading ? <Spinner /> : <Icon name="play_arrow" />}
                     <span>{isLoading ? 'Generating...' : 'Generate Video'}</span>

@@ -121,9 +121,9 @@ export const ImageGenPage: React.FC = () => {
                 </button>
               </div>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   <span className="font-medium text-gray-700 dark:text-gray-300">Mode:</span>
                   <div className="flex items-center p-1 bg-gray-200 dark:bg-gray-700 rounded-lg">
                     <button onClick={() => setMode('quality')} className={`px-3 py-1 text-sm font-semibold rounded-md transition-colors ${mode === 'quality' ? 'bg-white dark:bg-gray-800 shadow text-purple-600 dark:text-purple-400' : 'text-gray-600 dark:text-gray-300'}`}>High Quality</button>
@@ -131,7 +131,7 @@ export const ImageGenPage: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <button onClick={handleGenerate} disabled={isLoading || !prompt.trim()} className="bg-purple-600 hover:bg-purple-700 disabled:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2">
+              <button onClick={handleGenerate} disabled={isLoading || !prompt.trim()} className="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 disabled:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2">
                 {isLoading ? <Spinner /> : <Icon name="auto_awesome" />}<span>{isLoading ? 'Generating...' : 'Generate'}</span>
               </button>
             </div>

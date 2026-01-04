@@ -128,12 +128,12 @@ export const TextPlaygroundPage: React.FC = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[calc(100vh-6rem)]">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 min-h-[calc(100vh-6rem)] pb-6">
       {/* Left Column: Input */}
       <div className="lg:col-span-2 flex flex-col gap-6">
         <GlassCard className="flex-1 p-6 flex flex-col">
           {/* Header */}
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
             <h1 className="text-2xl font-bold flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-aurora-500 to-aurora-700 flex items-center justify-center">
                 <Icon name="edit_note" className="text-white text-xl" />

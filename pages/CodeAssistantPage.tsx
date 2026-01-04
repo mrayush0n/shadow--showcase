@@ -139,7 +139,7 @@ Output: Provide clean, well-commented code. Then briefly explain how it works.`;
         (mode === 'debug' && !promptText.trim());
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[calc(100vh-6rem)]">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 min-h-[calc(100vh-6rem)] pb-6">
             <div className="lg:col-span-2 flex flex-col gap-6">
                 {/* Code Input Card - Dark theme for code */}
                 <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6 flex flex-col gap-4 flex-1 shadow-2xl">

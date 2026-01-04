@@ -208,12 +208,12 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service, o
             </section>
 
             {/* Stats */}
-            <section className="relative z-10 px-6 py-16">
-                <div className="max-w-4xl mx-auto grid grid-cols-3 gap-6">
+            <section className="relative z-10 px-4 sm:px-6 py-12 sm:py-16">
+                <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
                     {data.stats.map((stat, i) => (
-                        <div key={i} className="animate-slideUp text-center p-6 bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200/50 dark:border-slate-800/50 rounded-2xl hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group" style={{ animationDelay: `${i * 0.1 + 0.3}s` }}>
-                            <p className={`text-3xl md:text-4xl font-black bg-gradient-to-r ${data.gradient} bg-clip-text text-transparent group-hover:scale-110 transition-transform`}>{stat.value}</p>
-                            <p className="text-sm text-slate-500 mt-1">{stat.label}</p>
+                        <div key={i} className="animate-slideUp text-center p-4 sm:p-6 bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200/50 dark:border-slate-800/50 rounded-2xl hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group" style={{ animationDelay: `${i * 0.1 + 0.3}s` }}>
+                            <p className={`text-2xl sm:text-3xl md:text-4xl font-black bg-gradient-to-r ${data.gradient} bg-clip-text text-transparent group-hover:scale-110 transition-transform`}>{stat.value}</p>
+                            <p className="text-xs sm:text-sm text-slate-500 mt-1">{stat.label}</p>
                         </div>
                     ))}
                 </div>
