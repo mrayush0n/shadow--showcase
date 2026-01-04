@@ -141,7 +141,7 @@ export const TripPlannerPage: React.FC = () => {
         setIsExtraLoading(type);
 
         // Use Shadow SI for packing lists and budgets
-        const modelName = 'gemini-2.5-flash';
+        const modelName = undefined; // Use backend default
 
         const prompt = type === 'packing'
             ? `I am going to ${selectedTrip.destination} for ${selectedTrip.duration} days. My interests are ${selectedTrip.interests}. Create a structured packing list. 

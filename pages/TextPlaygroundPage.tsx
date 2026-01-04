@@ -98,7 +98,7 @@ export const TextPlaygroundPage: React.FC = () => {
 
     try {
       // Use aiService instead of direct SDK
-      const model = useThinkingMode ? 'gemini-2.5-pro' : 'gemini-2.5-flash';
+      const model = undefined; // Use backend default (Gemini 3 Pro Preview)
       // Pass thinking config as part of system instruction or separate field if backend supports it.
       // Current backend structure supports: prompt, systemInstruction, model.
       // We'll append thinking budget info to system instruction if needed, or update backend to support it.

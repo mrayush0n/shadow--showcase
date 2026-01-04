@@ -86,7 +86,7 @@ export const ImageGenPage: React.FC = () => {
     setError(null);
     try {
       const ideaPrompt = `Based on the user's prompt "${prompt}", suggest one creative style addition to make the image more interesting. Return just the phrase to add. For example, if the prompt is "a cat", you could return "in the style of vaporwave" or "as a detailed watercolor painting". Be concise.`;
-      const result = await aiService.generateText(ideaPrompt, undefined, 'gemini-2.0-flash-exp');
+      const result = await aiService.generateText(ideaPrompt);
       const idea = result.result.trim().replace(/"/g, ''); // Clean up quotes
       setPrompt(prev => `${prev}, ${idea}`);
     } catch (e) {

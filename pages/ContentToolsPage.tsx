@@ -35,7 +35,7 @@ export const ContentToolsPage: React.FC = () => {
             else if (activeTab === 'writer') prompt = `You are Shadow, a professional writing assistant. Write a professional email about:\n${input}`;
 
             // Call Backend API
-            const response = await aiService.generateText(prompt, undefined, 'gemini-2.5-flash');
+            const response = await aiService.generateText(prompt);
 
             setResult(response.result); // generateText returns { result: string } on backend? No, wait. 
             // In gemini.ts: generateText returns string.
