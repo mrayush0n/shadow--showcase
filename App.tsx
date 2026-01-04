@@ -368,7 +368,7 @@ export default function App() {
   }
 
   if (userProfile && !userProfile.profileComplete) {
-    return <ProfilePage isSetupMode={true} />;
+    return <OnboardingWizard onComplete={() => window.location.reload()} />;
   }
 
   const ActivePageComponent = pages.find(p => p.id === activePageId)?.component || HomePage;

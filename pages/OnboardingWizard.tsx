@@ -317,12 +317,24 @@ const Step5Interests: React.FC<StepProps> = ({ data, updateData }) => (
 );
 
 export const OnboardingWizard: React.FC<{ onComplete?: () => void; onBack?: () => void }> = ({ onComplete, onBack }) => {
-    const [currentStep, setCurrentStep] = useState(1);
-    const [formData, setFormData] = useState<FormData>(initialFormData);
-    const [errors, setErrors] = useState<Record<string, string>>({});
-    const [isLoading, setIsLoading] = useState(false);
-    const [globalError, setGlobalError] = useState('');
-    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [user, setUser] = useState(auth.currentUser);
+
+    // Initialize with existing user data if available
+    useEffect(() => {
+        if (user) {
+            setFormData(prev => ({
+                ...prev,
+                firstName: prev.firstName || user.displayName?.split(' ')[0] || '',
+                lastName: prev.lastName || user.displayName?.split(' ').slice(1).join(' ') || '',
+                email: user.email || '',
+                photoURL: user.photoURL || null
+            }));
+            // Skip account step if user exists
+            if (currentStep === 1) {
+                // We keep them on step 1 to confirm details, but logic will skip step 2
+            }
+        }
+    }, [user]);
 
     const updateData = (field: string, value: any) => {
         setFormData(prev => ({ ...prev, [field]: value }));
@@ -352,12 +364,15 @@ export const OnboardingWizard: React.FC<{ onComplete?: () => void; onBack?: () =
                 if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
                 break;
             case 2:
-                if (!formData.email.trim()) newErrors.email = 'Email is required';
-                else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Invalid email address';
-                if (!formData.password) newErrors.password = 'Password is required';
-                else if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters';
-                if (!formData.confirmPassword) newErrors.confirmPassword = 'Please confirm your password';
-                else if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
+                // Skip validation for existing users
+                if (!user) {
+                    if (!formData.email.trim()) newErrors.email = 'Email is required';
+                    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Invalid email address';
+                    if (!formData.password) newErrors.password = 'Password is required';
+                    else if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters';
+                    if (!formData.confirmPassword) newErrors.confirmPassword = 'Please confirm your password';
+                    else if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
+                }
                 break;
         }
 
@@ -368,7 +383,12 @@ export const OnboardingWizard: React.FC<{ onComplete?: () => void; onBack?: () =
     const handleNext = () => {
         if (validateStep(currentStep)) {
             if (currentStep < 5) {
-                setCurrentStep(prev => prev + 1);
+                // Skip Step 2 (Account) if user is already logged in
+                let nextStep = currentStep + 1;
+                if (user && nextStep === 2) {
+                    nextStep = 3;
+                }
+                setCurrentStep(nextStep);
             } else {
                 handleSubmit();
             }
@@ -377,7 +397,12 @@ export const OnboardingWizard: React.FC<{ onComplete?: () => void; onBack?: () =
 
     const handleBack = () => {
         if (currentStep > 1) {
-            setCurrentStep(prev => prev - 1);
+            // Skip Step 2 (Account) if user is already logged in going back
+            let prevStep = currentStep - 1;
+            if (user && prevStep === 2) {
+                prevStep = 1;
+            }
+            setCurrentStep(prevStep);
         } else if (onBack) {
             onBack();
         }
@@ -388,24 +413,29 @@ export const OnboardingWizard: React.FC<{ onComplete?: () => void; onBack?: () =
         setGlobalError('');
 
         try {
-            // Create account in Firebase Auth
-            const userCredential = await auth.createUserWithEmailAndPassword(formData.email, formData.password);
-            const user = userCredential.user;
-            if (!user) throw new Error('Could not create user.');
+            let currentUser = user;
 
-            let photoURL = formData.photoURL;
+            // IF NO USER: Create new account (Email flow)
+            if (!currentUser) {
+                const userCredential = await auth.createUserWithEmailAndPassword(formData.email, formData.password);
+                currentUser = userCredential.user;
+            }
 
-            // Upload photo if selected
+            if (!currentUser) throw new Error('Could not create or find user.');
+
+            let photoURL = formData.photoURL || currentUser.photoURL;
+
+            // Upload photo if new file selected
             if (formData.photoFile) {
-                const storageRef = ref(storage, `profile_pictures/${user.uid}`);
+                const storageRef = ref(storage, `profile_pictures/${currentUser.uid}`);
                 await uploadBytes(storageRef, formData.photoFile);
                 photoURL = await getDownloadURL(storageRef);
             }
 
-            // Save user profile to Firestore
-            await db.collection('users').doc(user.uid).set({
-                uid: user.uid,
-                email: formData.email,
+            // Save/Update user profile
+            await db.collection('users').doc(currentUser.uid).set({
+                uid: currentUser.uid,
+                email: currentUser.email || formData.email,
                 firstName: formData.firstName.trim(),
                 lastName: formData.lastName.trim(),
                 phone: formData.phone.trim(),
@@ -420,7 +450,8 @@ export const OnboardingWizard: React.FC<{ onComplete?: () => void; onBack?: () =
                 interests: formData.interests.trim(),
                 receiveEmails: formData.receiveEmails,
                 profileComplete: true,
-            });
+                updatedAt: new Date().toISOString()
+            }, { merge: true }); // Merge to preserve existing Google data
 
             if (onComplete) onComplete();
         } catch (err: any) {
@@ -434,8 +465,8 @@ export const OnboardingWizard: React.FC<{ onComplete?: () => void; onBack?: () =
                 }
             }
             setGlobalError(errorMessage);
-            // Go back to account step if auth error
-            if (err.code?.startsWith('auth/')) setCurrentStep(2);
+            // Go back to account step ONLY if it's an auth creation error
+            if (err.code?.startsWith('auth/') && !user) setCurrentStep(2);
         } finally {
             setIsLoading(false);
         }
@@ -456,10 +487,10 @@ export const OnboardingWizard: React.FC<{ onComplete?: () => void; onBack?: () =
                             <div
                                 key={step.id}
                                 className={`flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 ${step.id < currentStep
-                                        ? 'bg-aurora-500 text-white'
-                                        : step.id === currentStep
-                                            ? 'bg-gradient-to-r from-aurora-500 to-rose-500 text-white shadow-lg'
-                                            : 'bg-slate-200 dark:bg-slate-700 text-slate-400'
+                                    ? 'bg-aurora-500 text-white'
+                                    : step.id === currentStep
+                                        ? 'bg-gradient-to-r from-aurora-500 to-rose-500 text-white shadow-lg'
+                                        : 'bg-slate-200 dark:bg-slate-700 text-slate-400'
                                     }`}
                             >
                                 {step.id < currentStep ? (
