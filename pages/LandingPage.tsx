@@ -7,7 +7,7 @@ import { TestimonialsSection, ScrollProgress, CookieConsent, NewsletterSignup, S
 interface LandingPageProps {
     onLogin: () => void;
     onExplore: () => void;
-    onNavigate: (page: 'about' | 'contact' | 'services' | 'portfolio' | 'faq' | 'pricing' | 'blog' | 'demo' | 'service-image' | 'service-video' | 'service-text' | 'service-code' | 'service-trip' | 'service-voice' | 'privacy' | 'terms' | '404') => void;
+    onNavigate: (page: string) => void;
 }
 
 export const LandingPage: React.FC<LandingPageProps> = ({ onLogin, onExplore, onNavigate }) => {
@@ -31,31 +31,31 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLogin, onExplore, on
         { icon: 'code', title: 'Code Assistant', description: 'Debug, explain & generate', color: 'emerald', delay: '0.3s', serviceId: 'service-code' as const, comingSoon: false },
         { icon: 'travel_explore', title: 'Trip Planner', description: 'AI travel planning', color: 'amber', delay: '0.4s', serviceId: 'service-trip' as const, comingSoon: false },
         { icon: 'graphic_eq', title: 'Voice Chat', description: 'Real-time voice AI', color: 'purple', delay: '0.5s', serviceId: 'service-voice' as const, comingSoon: false },
-        // Coming Soon Features
-        { icon: 'music_note', title: 'Music Studio', description: 'AI music generation & stem splitting', color: 'pink', delay: '0.6s', serviceId: null, comingSoon: true },
-        { icon: 'view_in_ar', title: '3D Generator', description: 'Text-to-3D model creation', color: 'cyan', delay: '0.7s', serviceId: null, comingSoon: true },
-        { icon: 'description', title: 'Document Chat', description: 'Chat with PDFs & documents', color: 'orange', delay: '0.8s', serviceId: null, comingSoon: true },
-        { icon: 'smart_toy', title: 'AI Agents', description: 'Build custom AI personas', color: 'indigo', delay: '0.9s', serviceId: null, comingSoon: true },
-        { icon: 'collections', title: 'Community Gallery', description: 'Share & discover creations', color: 'red', delay: '1s', serviceId: null, comingSoon: true },
-        { icon: 'storefront', title: 'Prompt Market', description: 'Curated prompt library', color: 'teal', delay: '1.1s', serviceId: null, comingSoon: true },
-        { icon: 'dashboard', title: 'Creative Canvas', description: 'Infinite whiteboard for ideas', color: 'lime', delay: '1.2s', serviceId: null, comingSoon: true },
-        // Wave 2 Coming Soon
-        { icon: 'podcasts', title: 'Podcast Studio', description: 'Convert text to podcasts', color: 'purple', delay: '1.3s', serviceId: null, comingSoon: true },
-        { icon: 'insights', title: 'Data Insights', description: 'AI-powered data analysis', color: 'blue', delay: '1.4s', serviceId: null, comingSoon: true },
-        { icon: 'slideshow', title: 'Slides Builder', description: 'Generate presentations', color: 'orange', delay: '1.5s', serviceId: null, comingSoon: true },
-        { icon: 'mail', title: 'Email Composer', description: 'Smart email drafting', color: 'green', delay: '1.6s', serviceId: null, comingSoon: true },
-        { icon: 'face', title: 'Avatar Studio', description: 'AI profile pictures', color: 'pink', delay: '1.7s', serviceId: null, comingSoon: true },
-        { icon: 'description', title: 'Resume Builder', description: 'ATS-optimized resumes', color: 'indigo', delay: '1.8s', serviceId: null, comingSoon: true },
-        { icon: 'search', title: 'SEO Optimizer', description: 'Content optimization', color: 'teal', delay: '1.9s', serviceId: null, comingSoon: true },
-        { icon: 'summarize', title: 'Meeting Notes', description: 'Meeting summaries & actions', color: 'yellow', delay: '2s', serviceId: null, comingSoon: true },
-        { icon: 'school', title: 'AI Tutor', description: 'Personalized learning', color: 'emerald', delay: '2.1s', serviceId: null, comingSoon: true },
-        { icon: 'photo_camera', title: 'Product Photo', description: 'AI product photography', color: 'red', delay: '2.2s', serviceId: null, comingSoon: true },
-        // Wave 3 Coming Soon
-        { icon: 'share', title: 'Social Media', description: 'Posts, captions & hashtags', color: 'pink', delay: '2.3s', serviceId: null, comingSoon: true },
-        { icon: 'translate', title: 'AI Translator', description: '100+ language translation', color: 'blue', delay: '2.4s', serviceId: null, comingSoon: true },
-        { icon: 'auto_stories', title: 'Story Writer', description: 'Creative story generation', color: 'amber', delay: '2.5s', serviceId: null, comingSoon: true },
-        { icon: 'fitness_center', title: 'Fitness Coach', description: 'Workouts & meal plans', color: 'green', delay: '2.6s', serviceId: null, comingSoon: true },
-        { icon: 'sentiment_very_satisfied', title: 'Meme Generator', description: 'Create viral memes', color: 'yellow', delay: '2.7s', serviceId: null, comingSoon: true },
+        // Previously Coming Soon Features - Now Active
+        { icon: 'music_note', title: 'Music Studio', description: 'AI music generation & stem splitting', color: 'pink', delay: '0.6s', serviceId: 'musicStudio', comingSoon: false },
+        { icon: 'view_in_ar', title: '3D Generator', description: 'Text-to-3D model creation', color: 'cyan', delay: '0.7s', serviceId: 'threeDStudio', comingSoon: false },
+        { icon: 'description', title: 'Document Chat', description: 'Chat with PDFs & documents', color: 'orange', delay: '0.8s', serviceId: 'documentChat', comingSoon: false },
+        { icon: 'smart_toy', title: 'AI Agents', description: 'Build custom AI personas', color: 'indigo', delay: '0.9s', serviceId: 'agentBuilder', comingSoon: false },
+        { icon: 'collections', title: 'Community Gallery', description: 'Share & discover creations', color: 'red', delay: '1s', serviceId: 'gallery', comingSoon: false },
+        { icon: 'storefront', title: 'Prompt Market', description: 'Curated prompt library', color: 'teal', delay: '1.1s', serviceId: 'promptMarket', comingSoon: false },
+        { icon: 'dashboard', title: 'Creative Canvas', description: 'Infinite whiteboard for ideas', color: 'lime', delay: '1.2s', serviceId: 'canvas', comingSoon: false },
+        // Wave 2 - Now Active
+        { icon: 'podcasts', title: 'Podcast Studio', description: 'Convert text to podcasts', color: 'purple', delay: '1.3s', serviceId: 'podcastStudio', comingSoon: false },
+        { icon: 'insights', title: 'Data Insights', description: 'AI-powered data analysis', color: 'blue', delay: '1.4s', serviceId: 'dataInsights', comingSoon: false },
+        { icon: 'slideshow', title: 'Slides Builder', description: 'Generate presentations', color: 'orange', delay: '1.5s', serviceId: 'presentationBuilder', comingSoon: false },
+        { icon: 'mail', title: 'Email Composer', description: 'Smart email drafting', color: 'green', delay: '1.6s', serviceId: 'emailComposer', comingSoon: false },
+        { icon: 'face', title: 'Avatar Studio', description: 'AI profile pictures', color: 'pink', delay: '1.7s', serviceId: 'avatarStudio', comingSoon: false },
+        { icon: 'description', title: 'Resume Builder', description: 'ATS-optimized resumes', color: 'indigo', delay: '1.8s', serviceId: 'resumeBuilder', comingSoon: false },
+        { icon: 'search', title: 'SEO Optimizer', description: 'Content optimization', color: 'teal', delay: '1.9s', serviceId: 'seoOptimizer', comingSoon: false },
+        { icon: 'summarize', title: 'Meeting Notes', description: 'Meeting summaries & actions', color: 'yellow', delay: '2s', serviceId: 'meetingNotes', comingSoon: false },
+        { icon: 'school', title: 'AI Tutor', description: 'Personalized learning', color: 'emerald', delay: '2.1s', serviceId: 'aiTutor', comingSoon: false },
+        { icon: 'photo_camera', title: 'Product Photo', description: 'AI product photography', color: 'red', delay: '2.2s', serviceId: 'productPhoto', comingSoon: false },
+        // Wave 3 - Now Active
+        { icon: 'share', title: 'Social Media', description: 'Posts, captions & hashtags', color: 'pink', delay: '2.3s', serviceId: 'socialMedia', comingSoon: false },
+        { icon: 'translate', title: 'AI Translator', description: '100+ language translation', color: 'blue', delay: '2.4s', serviceId: 'aiTranslator', comingSoon: false },
+        { icon: 'auto_stories', title: 'Story Writer', description: 'Creative story generation', color: 'amber', delay: '2.5s', serviceId: 'storyWriter', comingSoon: false },
+        { icon: 'fitness_center', title: 'Fitness Coach', description: 'Workouts & meal plans', color: 'green', delay: '2.6s', serviceId: 'fitnessCoach', comingSoon: false },
+        { icon: 'sentiment_very_satisfied', title: 'Meme Generator', description: 'Create viral memes', color: 'yellow', delay: '2.7s', serviceId: 'memeGenerator', comingSoon: false },
     ];
 
     const navLinks = [
