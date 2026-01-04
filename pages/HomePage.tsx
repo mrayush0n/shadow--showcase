@@ -231,7 +231,7 @@ export const HomePage: React.FC<HomePageProps> = ({ pages, setActivePageId }) =>
         <section className="text-center space-y-8 relative">
 
           {/* Branding Badge */}
-          <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/10 dark:bg-black/20 border border-white/20 dark:border-white/10 backdrop-blur-md shadow-lg animate-float">
+          <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/10 dark:bg-black/20 border border-white/20 dark:border-white/10 backdrop-blur-md shadow-lg">
             <span className="relative flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-aurora-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-3 w-3 bg-aurora-500"></span>

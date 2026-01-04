@@ -103,7 +103,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLogin, onExplore, on
                         bottom: `${-100 + (1 - mousePosition.y) * 80}px`,
                         right: `${-50 + (1 - mousePosition.x) * 80}px`,
                         transition: 'bottom 0.5s ease-out, right 0.5s ease-out',
-                        animation: 'float 8s ease-in-out infinite'
+                        transition: 'bottom 0.5s ease-out, right 0.5s ease-out',
                     }}
                 />
                 <div
@@ -112,7 +112,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLogin, onExplore, on
                         top: '40%',
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
-                        animation: 'float 12s ease-in-out infinite reverse'
+
                     }}
                 />
 
@@ -124,7 +124,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLogin, onExplore, on
                         style={{
                             top: `${Math.random() * 100}%`,
                             left: `${Math.random() * 100}%`,
-                            animation: `float ${5 + Math.random() * 10}s ease-in-out infinite`,
+
                             animationDelay: `${Math.random() * 5}s`
                         }}
                     />
@@ -253,7 +253,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLogin, onExplore, on
                     <div className="animate-slideUp inline-flex items-center gap-2 px-4 py-2 bg-rose-50/80 dark:bg-rose-500/10 backdrop-blur border border-rose-200 dark:border-rose-500/30 rounded-full text-sm text-rose-600 dark:text-rose-300 mb-8 hover:scale-105 transition-transform cursor-default">
                         <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
                         <span>Next Generation AI Platform</span>
-                        <Icon name="arrow_forward" className="text-sm animate-bounce" />
+                        <Icon name="arrow_forward" className="text-sm" />
                     </div>
 
                     {/* 3D Text Effect */}
@@ -332,7 +332,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLogin, onExplore, on
                                     )}
 
                                     {/* Floating Icon */}
-                                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${colors.gradient} flex items-center justify-center mb-5 shadow-lg transition-all duration-500 ${f.comingSoon ? 'grayscale-[30%]' : 'group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-xl'} animate-float`} style={{ animationDelay: f.delay }}>
+                                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${colors.gradient} flex items-center justify-center mb-5 shadow-lg transition-all duration-500 ${f.comingSoon ? 'grayscale-[30%]' : 'group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-xl'}`} style={{ animationDelay: f.delay }}>
                                         <Icon name={f.icon} className="text-3xl text-white" />
                                     </div>
                                     <h3 className={`text-xl font-bold text-slate-900 dark:text-white mb-2 ${f.comingSoon ? '' : 'group-hover:text-rose-500'} transition-colors`}>{f.title}</h3>
@@ -395,8 +395,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLogin, onExplore, on
                         </div>
 
                         {/* Floating orbs */}
-                        <div className="absolute -top-20 -left-20 w-40 h-40 bg-white/20 rounded-full blur-3xl animate-float" />
-                        <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-violet-400/30 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+                        <div className="absolute -top-20 -left-20 w-40 h-40 bg-white/20 rounded-full blur-3xl" />
+                        <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-violet-400/30 rounded-full blur-3xl" style={{ animationDelay: '2s' }} />
 
                         <div className="relative z-10">
                             <h2 className="text-3xl md:text-5xl font-black text-white mb-6 group-hover:scale-105 transition-transform duration-500">Ready to Start?</h2>
