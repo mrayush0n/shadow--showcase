@@ -1,8 +1,8 @@
 import { GoogleGenAI, Modality } from '@google/genai';
 
 // Configuration
-// Using Gemini 1.5 Pro as the high-capability default.
-const GEMINI_MODEL = 'gemini-1.5-pro';
+// User requested Gemini 3 Pro Preview models.
+const GEMINI_MODEL = 'gemini-3-pro-preview';
 
 // Initialize Gemini AI client
 const getGeminiClient = () => {
@@ -43,9 +43,9 @@ export const generateImage = async (
 ): Promise<{ imageData: string; mimeType: string } | null> => {
     const ai = getGeminiClient();
 
-    // Keeping 2.0 Flash Exp for Image Gen as it serves this purpose well in the experimental tier
+    // User specified "gemini-3-pro-image-preview" for image tasks.
     const response = await ai.models.generateContent({
-        model: 'gemini-2.0-flash-exp',
+        model: 'gemini-3-pro-image-preview',
         contents: prompt,
         config: {
             responseModalities: [Modality.TEXT, Modality.IMAGE],
@@ -100,7 +100,7 @@ export const editImage = async (
     const ai = getGeminiClient();
 
     const response = await ai.models.generateContent({
-        model: 'gemini-2.0-flash-exp', // Specific capability
+        model: 'gemini-3-pro-image-preview',
         contents: {
             parts: [
                 { inlineData: { mimeType, data: imageData } },
@@ -242,11 +242,7 @@ export const chat = async (
     enableSearch: boolean
 ): Promise<{ text: string; groundingLinks?: any[] }> => {
     const ai = getGeminiClient();
-    const modelName = isReasoningMode ? 'gemini-1.5-pro' : GEMINI_MODEL;
-
-    // Note: isReasoningMode currently defaults to 1.5-pro as well in this logic. 
-    // If we wanted a "reasoning" model specifically (like o1 equivalent), we'd use a specific one.
-    // For now, sticking to the standard Pro model is safest.
+    const modelName = isReasoningMode ? GEMINI_MODEL : GEMINI_MODEL; // Both use Pro Preview for max capabilities
 
     const tools = enableSearch ? [{ googleSearch: {} }] : [];
 
@@ -313,7 +309,7 @@ export const generateSpeech = async (
     const ai = getGeminiClient();
 
     const response = await ai.models.generateContent({
-        model: "gemini-2.0-flash-exp", // Specific TTS capabilities in 2.0 Flash Exp
+        model: "gemini-2.0-flash-exp",
         contents: { parts: [{ text: text }] },
         config: {
             responseModalities: [Modality.AUDIO],
@@ -364,7 +360,7 @@ export const processMultimodal = async (
     ];
 
     const response = await ai.models.generateContent({
-        model: "gemini-1.5-pro", // Pro model is better for deep multimodal reasoning
+        model: GEMINI_MODEL,
         contents: { parts: contentParts },
     });
 
