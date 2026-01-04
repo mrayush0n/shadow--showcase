@@ -59,49 +59,49 @@ const featureConfig: { [key: string]: { description: string, gradient: string, i
     gradient: "from-pink-500 to-rose-600",
     icon: "music_note",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   threeDStudio: {
     description: "Text-to-3D model creation.",
     gradient: "from-cyan-500 to-teal-600",
     icon: "view_in_ar",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   documentChat: {
     description: "Chat with PDFs and documents (RAG).",
     gradient: "from-orange-500 to-amber-600",
     icon: "description",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   agentBuilder: {
     description: "Build custom AI personas.",
     gradient: "from-indigo-500 to-purple-600",
     icon: "smart_toy",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   gallery: {
     description: "Share and discover community creations.",
     gradient: "from-red-500 to-pink-600",
     icon: "collections",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   promptMarket: {
     description: "Curated prompt library for all tools.",
     gradient: "from-teal-500 to-green-600",
     icon: "storefront",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   canvas: {
     description: "Infinite whiteboard for creative ideas.",
     gradient: "from-lime-500 to-green-600",
     icon: "dashboard",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   // Wave 2 Coming Soon
   podcastStudio: {
@@ -109,70 +109,70 @@ const featureConfig: { [key: string]: { description: string, gradient: string, i
     gradient: "from-purple-500 to-violet-600",
     icon: "podcasts",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   dataInsights: {
     description: "Upload data, get AI-powered charts and analysis.",
     gradient: "from-blue-500 to-cyan-600",
     icon: "insights",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   presentationBuilder: {
     description: "Generate slide decks from any topic.",
     gradient: "from-orange-500 to-red-600",
     icon: "slideshow",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   emailComposer: {
     description: "AI-powered email drafting and replies.",
     gradient: "from-green-500 to-emerald-600",
     icon: "mail",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   avatarStudio: {
     description: "Generate AI avatars and profile pictures.",
     gradient: "from-pink-500 to-rose-600",
     icon: "face",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   resumeBuilder: {
     description: "Generate ATS-optimized resumes.",
     gradient: "from-indigo-500 to-blue-600",
     icon: "description",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   seoOptimizer: {
     description: "Analyze and improve content for search engines.",
     gradient: "from-teal-500 to-cyan-600",
     icon: "search",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   meetingNotes: {
     description: "Get summaries, action items, and decisions.",
     gradient: "from-yellow-500 to-amber-600",
     icon: "summarize",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   aiTutor: {
     description: "Interactive learning with personalized explanations.",
     gradient: "from-emerald-500 to-green-600",
     icon: "school",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   productPhoto: {
     description: "AI product shots and background replacement.",
     gradient: "from-red-500 to-rose-600",
     icon: "photo_camera",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   // Wave 3 Coming Soon
   socialMedia: {
@@ -180,35 +180,35 @@ const featureConfig: { [key: string]: { description: string, gradient: string, i
     gradient: "from-pink-500 to-purple-600",
     icon: "share",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   aiTranslator: {
     description: "Translate text with cultural context in 100+ languages.",
     gradient: "from-blue-500 to-indigo-600",
     icon: "translate",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   storyWriter: {
     description: "Generate stories, characters & creative writing.",
     gradient: "from-amber-500 to-orange-600",
     icon: "auto_stories",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   fitnessCoach: {
     description: "Personalized workouts, meal plans & progress tracking.",
     gradient: "from-green-500 to-emerald-600",
     icon: "fitness_center",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
   memeGenerator: {
     description: "Create viral memes with AI suggestions.",
     gradient: "from-yellow-500 to-orange-600",
     icon: "sentiment_very_satisfied",
     span: "",
-    comingSoon: true
+    comingSoon: false
   },
 };
 

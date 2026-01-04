@@ -194,7 +194,7 @@ export const TripPlannerPage: React.FC = () => {
     };
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[calc(100vh-6rem)]">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 min-h-[calc(100vh-6rem)] pb-6">
             {/* Left Column: Form & History (Hidden when printing) */}
             <div className="flex flex-col gap-6 lg:col-span-1 h-full overflow-hidden print:hidden">
                 <div className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl p-6 rounded-3xl shadow-xl border border-white/20 overflow-y-auto custom-scrollbar">
