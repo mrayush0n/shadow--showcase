@@ -135,13 +135,12 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service, o
         <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-white transition-colors overflow-hidden">
             {/* Animated Background */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                <div className={`absolute top-0 left-1/3 w-[800px] h-[800px] bg-${data.color}-500/15 dark:bg-${data.color}-500/25 rounded-full blur-[200px]`} style={{ animation: 'float 12s ease-in-out infinite' }} />
-                <div className={`absolute bottom-0 right-1/3 w-[600px] h-[600px] bg-${data.color}-400/10 dark:bg-${data.color}-400/15 rounded-full blur-[150px]`} style={{ animation: 'float 10s ease-in-out infinite reverse' }} />
+                <div className={`absolute top-0 left-1/3 w-[800px] h-[800px] bg-${data.color}-500/15 dark:bg-${data.color}-500/25 rounded-full blur-[200px]`} />
+                <div className={`absolute bottom-0 right-1/3 w-[600px] h-[600px] bg-${data.color}-400/10 dark:bg-${data.color}-400/15 rounded-full blur-[150px]`} />
             </div>
 
             {/* Animations */}
             <style>{`
-                @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-30px) rotate(5deg); } }
                 @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
                 @keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
                 @keyframes pulse3d { 0%, 100% { transform: scale(1) rotateY(0deg); } 50% { transform: scale(1.05) rotateY(10deg); } }
@@ -228,7 +227,7 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service, o
                         {data.features.map((feature, i) => (
                             <div key={i} className="card-3d animate-slideUp bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200/50 dark:border-slate-800/50 rounded-3xl p-6 cursor-default group" style={{ animationDelay: `${i * 0.1 + 0.4}s` }}>
                                 <div className="flex items-start gap-5">
-                                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${data.gradient} flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`} style={{ animation: 'float 5s ease-in-out infinite', animationDelay: `${i * 0.2}s` }}>
+                                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${data.gradient} flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
                                         <Icon name={feature.icon} className="text-2xl text-white" />
                                     </div>
                                     <div>
@@ -261,7 +260,7 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({ service, o
                 <div className="max-w-4xl mx-auto">
                     <div className={`relative bg-gradient-to-br ${data.gradient} rounded-3xl p-12 md:p-16 text-center overflow-hidden shadow-2xl group`}>
                         <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '24px 24px' }} />
-                        <div className="absolute -top-20 -right-20 w-40 h-40 bg-white/20 rounded-full blur-3xl" style={{ animation: 'float 6s ease-in-out infinite' }} />
+                        <div className="absolute -top-20 -right-20 w-40 h-40 bg-white/20 rounded-full blur-3xl" />
                         <div className="relative z-10">
                             <h2 className="text-3xl md:text-5xl font-black text-white mb-6 group-hover:scale-105 transition-transform duration-500">Ready to Try {data.title}?</h2>
                             <p className="text-white/80 mb-10 text-lg max-w-xl mx-auto">Get started for free. No credit card required.</p>

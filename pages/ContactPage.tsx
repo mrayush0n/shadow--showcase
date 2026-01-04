@@ -36,8 +36,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onBack, onLogin, onExp
         <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-white transition-colors overflow-hidden">
             {/* Animated Background */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-sky-500/10 dark:bg-sky-500/20 rounded-full blur-[150px]" style={{ animation: 'float 10s ease-in-out infinite' }} />
-                <div className="absolute bottom-1/3 left-1/4 w-[500px] h-[500px] bg-rose-500/10 dark:bg-rose-500/15 rounded-full blur-[120px]" style={{ animation: 'float 8s ease-in-out infinite reverse' }} />
+                <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-sky-500/10 dark:bg-sky-500/20 rounded-full blur-[150px]" />
+                <div className="absolute bottom-1/3 left-1/4 w-[500px] h-[500px] bg-rose-500/10 dark:bg-rose-500/15 rounded-full blur-[120px]" />
             </div>
 
             {/* Animations */}
@@ -91,7 +91,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onBack, onLogin, onExp
                 <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
                     {contactMethods.map((m, i) => (
                         <div key={i} className="card-3d animate-slideUp bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200/50 dark:border-slate-800/50 rounded-2xl p-6 text-center cursor-default group" style={{ animationDelay: `${m.delay}s` }}>
-                            <div className={`w-12 h-12 bg-gradient-to-br ${m.gradient} rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`} style={{ animation: 'float 5s ease-in-out infinite', animationDelay: `${m.delay}s` }}>
+                            <div className={`w-12 h-12 bg-gradient-to-br ${m.gradient} rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
                                 <Icon name={m.icon} className="text-xl text-white" />
                             </div>
                             <h3 className="font-bold text-slate-900 dark:text-white mb-1 group-hover:text-rose-500 transition-colors">{m.title}</h3>
@@ -107,7 +107,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onBack, onLogin, onExp
                     <h2 className="text-2xl font-bold text-center text-slate-900 dark:text-white mb-8 animate-slideUp">Send a Message</h2>
                     {submitted ? (
                         <div className="animate-scaleIn bg-gradient-to-br from-emerald-50 to-emerald-100/50 dark:from-emerald-500/10 dark:to-emerald-500/5 border border-emerald-200/50 dark:border-emerald-500/20 rounded-3xl p-10 text-center">
-                            <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl" style={{ animation: 'float 3s ease-in-out infinite' }}>
+                            <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
                                 <Icon name="check" className="text-white text-4xl" />
                             </div>
                             <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Message Sent!</h3>

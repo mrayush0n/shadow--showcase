@@ -103,7 +103,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLogin, onExplore, on
                         bottom: `${-100 + (1 - mousePosition.y) * 80}px`,
                         right: `${-50 + (1 - mousePosition.x) * 80}px`,
                         transition: 'bottom 0.5s ease-out, right 0.5s ease-out',
-                        transition: 'bottom 0.5s ease-out, right 0.5s ease-out',
                     }}
                 />
                 <div

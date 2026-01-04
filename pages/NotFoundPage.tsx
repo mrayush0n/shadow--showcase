@@ -55,7 +55,7 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({ onBack }) => {
                         404
                     </h1>
                     <div
-                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-9xl animate-float"
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-9xl"
                         style={{
                             transform: `translate(calc(-50% + ${mousePosition.x * 20}px), calc(-50% + ${mousePosition.y * 20}px)) rotate(10deg)`
                         }}

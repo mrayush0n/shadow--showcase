@@ -66,8 +66,8 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onBack, onLogin, onExplore }) 
         <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-white transition-colors overflow-hidden">
             {/* Animated Background */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-sky-500/10 dark:bg-sky-500/20 rounded-full blur-[150px]" style={{ animation: 'float 10s ease-in-out infinite' }} />
-                <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-rose-500/10 dark:bg-rose-500/15 rounded-full blur-[120px]" style={{ animation: 'float 8s ease-in-out infinite reverse' }} />
+                <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-sky-500/10 dark:bg-sky-500/20 rounded-full blur-[150px]" />
+                <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-rose-500/10 dark:bg-rose-500/15 rounded-full blur-[120px]" />
             </div>
 
             {/* Animations */}
@@ -123,8 +123,8 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onBack, onLogin, onExplore }) 
                                 key={cat.id}
                                 onClick={() => { setActiveCategory(cat.id); setOpenFaq(null); }}
                                 className={`group flex items-center gap-2 px-5 py-3 rounded-xl font-medium text-sm transition-all duration-500 ${activeCategory === cat.id
-                                        ? `bg-gradient-to-r ${cat.gradient} text-white shadow-xl scale-105`
-                                        : 'bg-white/80 dark:bg-slate-800/80 backdrop-blur border border-slate-200/50 dark:border-slate-700/50 text-slate-600 dark:text-slate-400 hover:scale-105 hover:shadow-lg'
+                                    ? `bg-gradient-to-r ${cat.gradient} text-white shadow-xl scale-105`
+                                    : 'bg-white/80 dark:bg-slate-800/80 backdrop-blur border border-slate-200/50 dark:border-slate-700/50 text-slate-600 dark:text-slate-400 hover:scale-105 hover:shadow-lg'
                                     }`}
                             >
                                 <Icon name={cat.icon} className={`text-lg transition-transform group-hover:rotate-12 ${activeCategory === cat.id ? '' : 'group-hover:scale-110'}`} />

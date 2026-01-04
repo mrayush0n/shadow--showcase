@@ -37,8 +37,8 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onBack, onLogin, o
         <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-white transition-colors overflow-hidden">
             {/* Animated Background */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-violet-500/10 dark:bg-violet-500/20 rounded-full blur-[150px]" style={{ animation: 'float 10s ease-in-out infinite' }} />
-                <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-rose-500/10 dark:bg-rose-500/15 rounded-full blur-[120px]" style={{ animation: 'float 8s ease-in-out infinite reverse' }} />
+                <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-violet-500/10 dark:bg-violet-500/20 rounded-full blur-[150px]" />
+                <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-rose-500/10 dark:bg-rose-500/15 rounded-full blur-[120px]" />
             </div>
 
             {/* Animations */}
@@ -103,7 +103,7 @@ export const PortfolioPage: React.FC<PortfolioPageProps> = ({ onBack, onLogin, o
                 <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {projects.map((project, index) => (
                         <div key={index} className="card-3d animate-slideUp bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200/50 dark:border-slate-800/50 rounded-3xl p-6 cursor-pointer group" style={{ animationDelay: `${project.delay}s` }}>
-                            <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${project.gradient} flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`} style={{ animation: 'float 5s ease-in-out infinite', animationDelay: `${project.delay}s` }}>
+                            <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${project.gradient} flex items-center justify-center mb-5 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
                                 <Icon name={project.icon} className="text-2xl text-white" />
                             </div>
                             <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{project.category}</span>

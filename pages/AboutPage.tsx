@@ -42,8 +42,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBack, onLogin, onExplore
         <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-white transition-colors overflow-hidden">
             {/* Animated Background */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-rose-500/10 dark:bg-rose-500/20 rounded-full blur-[150px]" style={{ animation: 'float 10s ease-in-out infinite' }} />
-                <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-violet-500/10 dark:bg-violet-500/15 rounded-full blur-[120px]" style={{ animation: 'float 8s ease-in-out infinite reverse' }} />
+                <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-rose-500/10 dark:bg-rose-500/20 rounded-full blur-[150px]" />
+                <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-violet-500/10 dark:bg-violet-500/15 rounded-full blur-[120px]" />
             </div>
 
             {/* Animations */}
@@ -95,14 +95,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBack, onLogin, onExplore
             <section className="relative z-10 px-6 py-16">
                 <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-6">
                     <div className="card-3d animate-slideUp bg-gradient-to-br from-rose-50 to-rose-100/50 dark:from-rose-500/10 dark:to-rose-500/5 border border-rose-200/50 dark:border-rose-500/20 rounded-3xl p-8 cursor-default" style={{ animationDelay: '0.1s' }}>
-                        <div className="w-14 h-14 bg-gradient-to-br from-rose-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg" style={{ animation: 'float 5s ease-in-out infinite' }}>
+                        <div className="w-14 h-14 bg-gradient-to-br from-rose-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
                             <Icon name="flag" className="text-white text-2xl" />
                         </div>
                         <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Our Mission</h2>
                         <p className="text-slate-600 dark:text-slate-400">Empower creators worldwide with AI tools that amplify human creativity.</p>
                     </div>
                     <div className="card-3d animate-slideUp bg-gradient-to-br from-violet-50 to-violet-100/50 dark:from-violet-500/10 dark:to-violet-500/5 border border-violet-200/50 dark:border-violet-500/20 rounded-3xl p-8 cursor-default" style={{ animationDelay: '0.2s' }}>
-                        <div className="w-14 h-14 bg-gradient-to-br from-violet-500 to-purple-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg" style={{ animation: 'float 5s ease-in-out infinite', animationDelay: '1s' }}>
+                        <div className="w-14 h-14 bg-gradient-to-br from-violet-500 to-purple-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
                             <Icon name="visibility" className="text-white text-2xl" />
                         </div>
                         <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Our Vision</h2>
@@ -136,7 +136,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBack, onLogin, onExplore
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {team.map((m, i) => (
                             <div key={i} className="card-3d animate-slideUp bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200/50 dark:border-slate-800/50 rounded-2xl p-6 text-center cursor-default group" style={{ animationDelay: `${i * 0.1 + 0.4}s` }}>
-                                <div className={`w-20 h-20 bg-gradient-to-br ${m.gradient} rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-white shadow-xl group-hover:scale-110 transition-transform duration-500`} style={{ animation: 'float 6s ease-in-out infinite', animationDelay: `${i * 0.5}s` }}>
+                                <div className={`w-20 h-20 bg-gradient-to-br ${m.gradient} rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-white shadow-xl group-hover:scale-110 transition-transform duration-500`}>
                                     {m.avatar}
                                 </div>
                                 <h3 className="font-bold text-slate-900 dark:text-white group-hover:text-rose-500 transition-colors">{m.name}</h3>
