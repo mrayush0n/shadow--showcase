@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { auth, db, storage } from '../firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { Icon } from '../components/Icon';
@@ -316,8 +316,10 @@ const Step5Interests: React.FC<StepProps> = ({ data, updateData }) => (
     </div>
 );
 
+import { useAuth } from '../context/AuthContext';
+
 export const OnboardingWizard: React.FC<{ onComplete?: () => void; onBack?: () => void }> = ({ onComplete, onBack }) => {
-    const [user, setUser] = useState(auth.currentUser);
+    const { user } = useAuth();
 
     // Initialize with existing user data if available
     useEffect(() => {
@@ -416,12 +418,16 @@ export const OnboardingWizard: React.FC<{ onComplete?: () => void; onBack?: () =
             let currentUser = user;
 
             // IF NO USER: Create new account (Email flow)
+            // Note: If we are already logged in (user exists), we skip creation.
             if (!currentUser) {
                 const userCredential = await auth.createUserWithEmailAndPassword(formData.email, formData.password);
                 currentUser = userCredential.user;
             }
 
             if (!currentUser) throw new Error('Could not create or find user.');
+
+            // FIX: Ensure we have the latest user object for updates
+            // In email flow, currentUser is the object. In Google flow, 'user' from context is it.
 
             let photoURL = formData.photoURL || currentUser.photoURL;
 
