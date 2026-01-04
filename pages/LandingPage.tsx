@@ -132,10 +132,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLogin, onExplore, on
 
             {/* CSS Animations */}
             <style>{`
-                @keyframes float {
-                    0%, 100% { transform: translateY(0px) rotate(0deg); }
-                    50% { transform: translateY(-20px) rotate(2deg); }
-                }
+
                 @keyframes slideUp {
                     from { opacity: 0; transform: translateY(30px); }
                     to { opacity: 1; transform: translateY(0); }
@@ -159,7 +156,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLogin, onExplore, on
                 .animate-slideUp { animation: slideUp 0.6s ease-out forwards; }
                 .animate-slideIn { animation: slideIn 0.5s ease-out forwards; }
                 .animate-scaleIn { animation: scaleIn 0.4s ease-out forwards; }
-                .animate-float { animation: float 6s ease-in-out infinite; }
+
                 .animate-glow { animation: glow 2s ease-in-out infinite; }
                 .card-3d {
                     transform-style: preserve-3d;
