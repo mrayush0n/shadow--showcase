@@ -1,0 +1,68 @@
+{
+    "name": "Shadow Showcase",
+    "short_name": "Shadow AI",
+    "description": "Next Generation AI Platform for Creators",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0f172a",
+    "theme_color": "#f43f5e",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": [
+        "productivity",
+        "utilities",
+        "entertainment"
+    ],
+    "screenshots": [],
+    "shortcuts": [
+        {
+            "name": "Image Studio",
+            "short_name": "Images",
+            "description": "Generate and edit images with AI",
+            "url": "/?page=imagePlayground",
+            "icons": [
+                {
+                    "src": "/logo.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Text Playground",
+            "short_name": "Text",
+            "description": "AI text generation tools",
+            "url": "/?page=textPlayground",
+            "icons": [
+                {
+                    "src": "/logo.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Code Assistant",
+            "short_name": "Code",
+            "description": "Debug and generate code",
+            "url": "/?page=codeDebugger",
+            "icons": [
+                {
+                    "src": "/logo.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ]
+}

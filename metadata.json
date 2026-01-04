@@ -1,0 +1,7 @@
+{
+  "name": "Shadow Showcase",
+  "description": "A showcase of the Google Gemini API's capabilities, from text and image generation to real-time voice conversations and video analysis.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
