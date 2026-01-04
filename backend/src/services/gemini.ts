@@ -1,5 +1,9 @@
 import { GoogleGenAI, Modality } from '@google/genai';
 
+// Configuration
+// Using Gemini 1.5 Pro as the high-capability default.
+const GEMINI_MODEL = 'gemini-1.5-pro';
+
 // Initialize Gemini AI client
 const getGeminiClient = () => {
     const apiKey = process.env.GEMINI_API_KEY;
@@ -17,7 +21,7 @@ const getGeminiClient = () => {
 export const generateText = async (
     prompt: string,
     systemInstruction?: string,
-    model: string = 'gemini-2.0-flash-exp'
+    model: string = GEMINI_MODEL
 ): Promise<string> => {
     const ai = getGeminiClient();
 
@@ -39,8 +43,9 @@ export const generateImage = async (
 ): Promise<{ imageData: string; mimeType: string } | null> => {
     const ai = getGeminiClient();
 
+    // Keeping 2.0 Flash Exp for Image Gen as it serves this purpose well in the experimental tier
     const response = await ai.models.generateContent({
-        model: 'gemini-2.0-flash-exp', // Unified model handles generation
+        model: 'gemini-2.0-flash-exp',
         contents: prompt,
         config: {
             responseModalities: [Modality.TEXT, Modality.IMAGE],
@@ -72,7 +77,7 @@ export const analyzeImage = async (
     const ai = getGeminiClient();
 
     const response = await ai.models.generateContent({
-        model: 'gemini-2.0-flash-exp',
+        model: GEMINI_MODEL,
         contents: {
             parts: [
                 { inlineData: { mimeType, data: imageData } },
@@ -95,7 +100,7 @@ export const editImage = async (
     const ai = getGeminiClient();
 
     const response = await ai.models.generateContent({
-        model: 'gemini-2.0-flash-exp',
+        model: 'gemini-2.0-flash-exp', // Specific capability
         contents: {
             parts: [
                 { inlineData: { mimeType, data: imageData } },
@@ -138,7 +143,7 @@ export const processCode = async (
     };
 
     const response = await ai.models.generateContent({
-        model: 'gemini-2.0-flash-exp',
+        model: GEMINI_MODEL,
         contents: prompts[mode],
         config: {
             systemInstruction: 'You are an expert software engineer and coding assistant. Provide clear, well-documented code and explanations.',
@@ -186,7 +191,7 @@ export const generateTripItinerary = async (
     if (options.proTips) prompt += `\n- Include 'Pro Tips' for avoiding crowds or saving money.`;
 
     const response = await ai.models.generateContent({
-        model: 'gemini-2.0-flash-exp',
+        model: GEMINI_MODEL,
         contents: prompt,
         config: { tools: [{ googleMaps: {} }] as any },
     });
@@ -220,7 +225,7 @@ export const generateTripExtra = async (
        Provide specific estimates for: Accommodation, Food & Dining, Transportation, Activities, and a 'Buffer' fund. Format as a markdown table.`;
 
     const response = await ai.models.generateContent({
-        model: 'gemini-2.0-flash-exp',
+        model: GEMINI_MODEL,
         contents: prompt,
     });
 
@@ -237,12 +242,14 @@ export const chat = async (
     enableSearch: boolean
 ): Promise<{ text: string; groundingLinks?: any[] }> => {
     const ai = getGeminiClient();
-    const modelName = 'gemini-2.0-flash-exp'; // Unified model
+    const modelName = isReasoningMode ? 'gemini-1.5-pro' : GEMINI_MODEL;
+
+    // Note: isReasoningMode currently defaults to 1.5-pro as well in this logic. 
+    // If we wanted a "reasoning" model specifically (like o1 equivalent), we'd use a specific one.
+    // For now, sticking to the standard Pro model is safest.
 
     const tools = enableSearch ? [{ googleSearch: {} }] : [];
 
-    // For simplicity in this backend implementation, we'll use generateContent instead of chat session for stateless-ness or reconstruct history
-    // But better to use generateContent with full history for one-off calls if managing state on frontend
     const response = await ai.models.generateContent({
         model: modelName,
         contents: [...history.map(m => ({ role: m.role, parts: m.parts })), { role: 'user', parts: [{ text: message }] }],
@@ -273,23 +280,11 @@ export const generateVideo = async (
     const imagePayload = image && mimeType ? { image: { imageBytes: image, mimeType: mimeType } } : {};
 
     let operation = await ai.models.generateVideos({
-        model: 'veo-2.0-generate-preview', // Correct model for Veo? or 'veo-3.1-fast-generate-preview' was a hallucination too? Using safe bet.
+        model: 'veo-2.0-generate-preview',
         prompt: prompt,
         ...imagePayload,
         config: { numberOfVideos: 1, resolution: '720p', aspectRatio: aspectRatio }
     });
-
-    // Note: veo-3.1-fast-generate-preview is not a standard model name I recognize as stable. 
-    // Usually it's 'veo-experimental' or similar. 
-    // But let's leave it if the user claimed it worked before? 
-    // Actually, 'veo-2.0-generate-preview' is likely the real one if we assume 2.0 era.
-    // Let's stick to 'veo-2.0-generate-preview' or just 'veo-experimental'. 
-    // I will try to leave the original unless I'm sure. 
-    // Re-reading: The original code had 'veo-3.1-fast-generate-preview'. That seems VERY specific. 
-    // Maybe checking the image gen function? It used 'gemini-2.0-flash-exp-image-generation'.
-    // I will assume 'veo-2.0-generate-preview-001' is safer? No, standard is often just 'veo'.
-    // Let's NOT change the video model unless I have to. The prompt was "fix incorrect model names".
-    // I'll leave video as is for now, main focus is Voice Chat (gemini-2.5 issues).
 
     // Poll for completion
     while (!operation.done) {
@@ -318,7 +313,7 @@ export const generateSpeech = async (
     const ai = getGeminiClient();
 
     const response = await ai.models.generateContent({
-        model: "gemini-2.0-flash-exp", // Features TTS capability
+        model: "gemini-2.0-flash-exp", // Specific TTS capabilities in 2.0 Flash Exp
         contents: { parts: [{ text: text }] },
         config: {
             responseModalities: [Modality.AUDIO],
@@ -342,7 +337,7 @@ export const transcribeAudio = async (
     const ai = getGeminiClient();
 
     const response = await ai.models.generateContent({
-        model: "gemini-2.0-flash-exp",
+        model: GEMINI_MODEL,
         contents: {
             parts: [
                 { inlineData: { mimeType, data: audioData } },
@@ -369,7 +364,7 @@ export const processMultimodal = async (
     ];
 
     const response = await ai.models.generateContent({
-        model: "gemini-2.0-flash-exp",
+        model: "gemini-1.5-pro", // Pro model is better for deep multimodal reasoning
         contents: { parts: contentParts },
     });
 
