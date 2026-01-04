@@ -257,7 +257,7 @@ export const HomePage: React.FC<HomePageProps> = ({ pages, setActivePageId }) =>
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
             <button
-              onClick={() => setActivePageId('imageGen')}
+              onClick={() => document.getElementById('capabilities')?.scrollIntoView({ behavior: 'smooth' })}
               className="px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold text-lg shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group"
             >
               <span className="relative z-10 flex items-center gap-2">
@@ -270,7 +270,7 @@ export const HomePage: React.FC<HomePageProps> = ({ pages, setActivePageId }) =>
         </section>
 
         {/* Features Bento Grid */}
-        <section className="space-y-8">
+        <section id="capabilities" className="space-y-8">
           <div className="flex items-center gap-4">
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-300 dark:via-slate-700 to-transparent" />
             <h2 className="text-2xl font-bold text-slate-400 uppercase tracking-widest">Capabilities</h2>
