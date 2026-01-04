@@ -197,12 +197,12 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onBack, onLogin, onE
             {/* Animated Background */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-rose-500/10 dark:bg-rose-500/20 rounded-full blur-[150px] animate-pulse" />
-                <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-violet-500/10 dark:bg-violet-500/15 rounded-full blur-[120px]" style={{ animation: 'float 8s ease-in-out infinite' }} />
+                <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-violet-500/10 dark:bg-violet-500/15 rounded-full blur-[120px]" />
             </div>
 
             {/* Animations */}
             <style>{`
-                @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
                 @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
                 .animate-slideUp { animation: slideUp 0.6s ease-out forwards; }
                 .card-3d { transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); }
@@ -254,7 +254,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onBack, onLogin, onE
                         >
                             <div className="flex items-start gap-6">
                                 {/* Icon */}
-                                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center shadow-xl flex-shrink-0`} style={{ animation: 'float 4s ease-in-out infinite', animationDelay: `${service.delay}s` }}>
+                                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center shadow-xl flex-shrink-0`}>
                                     <Icon name={service.icon} className="text-3xl text-white" />
                                 </div>
 
