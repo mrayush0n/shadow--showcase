@@ -37,7 +37,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ pages, activePageId, setActive
   // Features that are coming soon (not yet active) - Admins bypass this
   const comingSoonPages = isAdmin ? [] : [
     'musicStudio', 'threeDStudio', 'documentChat', 'agentBuilder', 'gallery', 'promptMarket', 'canvas',
-    'podcastStudio', 'dataInsights'
+    'podcastStudio', 'dataInsights',
+    // Wave 2 & 3
+    'presentationBuilder', 'emailComposer', 'avatarStudio', 'resumeBuilder', 'seoOptimizer',
+    'meetingNotes', 'aiTutor', 'productPhoto',
+    'socialMedia', 'aiTranslator', 'storyWriter', 'fitnessCoach', 'memeGenerator'
   ];
 
   return (
