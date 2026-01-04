@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3001/api/ai';
+const API_URL = '/api/ai';
 
 export const aiService = {
     // Generate Text
